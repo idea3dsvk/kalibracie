@@ -28,9 +28,9 @@ dist-ssr
 firebase-debug.log
 firestore-debug.log
 
-# Environment files with sensitive data
-src/environments/environment.ts
-src/environments/environment.prod.ts
+# Environment files with sensitive data (Firebase config je verejný, takže je OK commituť)
+# src/environments/environment.ts
+# src/environments/environment.prod.ts
 
 # Angular
 .angular/
