@@ -1,0 +1,5 @@
+{
+  "name": "Evidencia kalibračných zariadení",
+  "description": "Webová aplikácia na sledovanie kalibrácie zariadení vo firme s podporou používateľských účtov a rolí (Admin, Moderator, User). Umožňuje spravovať zariadenia, ich kalibračnú históriu a exportovať dáta.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,44 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper funkcia pre získanie užívateľskej roly
+    function getUserRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+    
+    function isAdmin() {
+      return request.auth != null && getUserRole() == 'Admin';
+    }
+    
+    function isModerator() {
+      return request.auth != null && getUserRole() == 'Moderator';
+    }
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Users kolekcia - len authenticated môžu čítať vlastné dáta
+    match /users/{userId} {
+      allow read: if isAuthenticated() && request.auth.uid == userId;
+      allow write: if isAdmin(); // Len admin môže meniť užívateľov
+    }
+    
+    // Devices kolekcia - role-based access
+    match /devices/{deviceId} {
+      // Každý prihlásený môže čítať
+      allow read: if isAuthenticated();
+      
+      // Len Admin môže pridávať nové zariadenia
+      allow create: if isAdmin();
+      
+      // Admin a Moderator môžu aktualizovať (kalibrovať)
+      allow update: if isAdmin() || isModerator();
+      
+      // Len Admin môže mazať
+      allow delete: if isAdmin();
+    }
+  }
+}

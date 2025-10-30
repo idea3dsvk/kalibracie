@@ -1,0 +1,105 @@
+{
+  "general": {
+    "save": "Uložiť",
+    "cancel": "Zrušiť",
+    "close": "Zavrieť",
+    "year": "rok",
+    "years": "roky",
+    "noDevicesFound": "Nenašli sa žiadne zariadenia",
+    "noDevicesHint": "Skúste zmeniť filter alebo pridajte nové zariadenie.",
+    "errorSaving": "Chyba pri ukladaní do databázy",
+    "errorDeleting": "Chyba pri mazaní z databázy"
+  },
+  "login": {
+    "title": "Evidencia kalibrácií",
+    "subtitle": "Prosím, prihláste sa pre pokračovanie.",
+    "username": "Email",
+    "usernamePlaceholder": "admin@demo.com",
+    "password": "Heslo",
+    "passwordPlaceholder": "password",
+    "loginButton": "Prihlásiť sa",
+    "error": "Nesprávny email alebo heslo.",
+    "demoAccounts": "Demo účty",
+    "loading": "Prihlasovanie..."
+  },
+  "header": {
+    "title": "Evidencia kalibrácií",
+    "logout": "Odhlásiť sa",
+    "addDevice": "Pridať zariadenie"
+  },
+  "dashboard": {
+    "title": "Prehľad",
+    "overdue": "Po termíne",
+    "dueSoonThisMonth": "Končí tento mesiac",
+    "deviceStatus": "Stav zariadení"
+  },
+  "controls": {
+    "searchPlaceholder": "Hľadať zariadenie...",
+    "allManufacturers": "Všetci výrobcovia",
+    "allUsages": "Všetky použitia",
+    "sortBy": {
+      "label": "Zoradiť",
+      "name": "Názov",
+      "status": "Stav",
+      "validity": "Platnosť"
+    }
+  },
+  "device": {
+    "name": "Názov",
+    "serialNumber": "Sériové číslo",
+    "manufacturer": "Výrobca",
+    "model": "Model",
+    "usage": "Použitie",
+    "msnCode": "MSN kód",
+    "status": "Stav",
+    "photo": "Fotografia zariadenia",
+    "validUntil": "Platnosť do",
+    "downloadCertificate": "Stiahnuť certifikát",
+    "calibrateButton": "Kalibrovať",
+    "deleteConfirm": "Naozaj chcete odstrániť toto zariadenie?"
+  },
+  "status": {
+    "valid": "Platná",
+    "dueSoon": "Končí platnosť",
+    "overdue": "Neplatná",
+    "uncalibrated": "Nekalibrované",
+    "validShort": "Platná",
+    "dueSoonShort": "Končí",
+    "uncalibratedShort": "Nekalib."
+  },
+  "add": {
+    "title": "Pridať nové zariadenie",
+    "changePhoto": "Zmeniť fotku",
+    "uploadPhoto": "Nahrať fotku",
+    "usagePlaceholder": "napr. Laboratórium B",
+    "msnPlaceholder": "napr. E-02-01-3002",
+    "msnError": "Zadajte kód v tvare P-XX-XX-XXXX (napr. E-02-01-3002)."
+  },
+  "calibrate": {
+    "title": "Kalibrácia zariadenia",
+    "subtitle": "Zariadenie",
+    "period": {
+      "label": "Perióda kalibrácie",
+      "free": "Calibration free"
+    },
+    "notRequired": "Nevyžaduje sa",
+    "certificate": "Kalibračný certifikát",
+    "uploadPdf": "Nahrať PDF súbor",
+    "pdfError": "Prosím, nahrajte súbor vo formáte PDF.",
+    "saveButton": "Uložiť kalibráciu"
+  },
+  "history": {
+    "title": "História kalibrácií",
+    "subtitle": "Zariadenie",
+    "calibrationDate": "Dátum kalibrácie",
+    "validUntil": "Platnosť do",
+    "period": "Perióda",
+    "certificate": "Certifikát",
+    "download": "Stiahnuť",
+    "noHistory": "Pre toto zariadenie neexistuje žiadna história kalibrácií."
+  },
+  "export": {
+    "csvFilename": "evidencia_kalibracii",
+    "pdfFilename": "evidencia_kalibracii"
+  }
+}

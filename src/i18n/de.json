@@ -1,0 +1,102 @@
+{
+  "general": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "year": "Jahr",
+    "years": "Jahre",
+    "noDevicesFound": "Keine Geräte gefunden",
+    "noDevicesHint": "Ändern Sie den Filter oder fügen Sie ein neues Gerät hinzu."
+  },
+  "login": {
+    "title": "Kalibrierungsprotokoll",
+    "subtitle": "Bitte melden Sie sich an, um fortzufahren.",
+    "username": "Benutzername",
+    "usernamePlaceholder": "admin / moderator / user",
+    "password": "Passwort",
+    "passwordPlaceholder": "password",
+    "loginButton": "Anmelden",
+    "error": "Falscher Benutzername oder falsches Passwort.",
+    "demoAccounts": "Demo-Konten"
+  },
+  "header": {
+    "title": "Kalibrierungsprotokoll",
+    "logout": "Abmelden",
+    "addDevice": "Gerät hinzufügen"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overdue": "Überfällig",
+    "dueSoonThisMonth": "Diesen Monat fällig",
+    "deviceStatus": "Gerätestatus"
+  },
+  "controls": {
+    "searchPlaceholder": "Gerät suchen...",
+    "allManufacturers": "Alle Hersteller",
+    "allUsages": "Alle Verwendungen",
+    "sortBy": {
+      "label": "Sortieren nach",
+      "name": "Name",
+      "status": "Status",
+      "validity": "Gültigkeit"
+    }
+  },
+  "device": {
+    "name": "Name",
+    "serialNumber": "Seriennummer",
+    "manufacturer": "Hersteller",
+    "model": "Modell",
+    "usage": "Verwendung",
+    "msnCode": "MSN-Code",
+    "status": "Status",
+    "photo": "Gerätefoto",
+    "validUntil": "Gültig bis",
+    "downloadCertificate": "Zertifikat herunterladen",
+    "calibrateButton": "Kalibrieren",
+    "deleteConfirm": "Möchten Sie dieses Gerät wirklich löschen?"
+  },
+  "status": {
+    "valid": "Gültig",
+    "dueSoon": "Bald fällig",
+    "overdue": "Überfällig",
+    "uncalibrated": "Unkalibriert",
+    "validShort": "Gültig",
+    "dueSoonShort": "Fällig",
+    "uncalibratedShort": "Unkalib."
+  },
+  "add": {
+    "title": "Neues Gerät hinzufügen",
+    "changePhoto": "Foto ändern",
+    "uploadPhoto": "Foto hochladen",
+    "usagePlaceholder": "z.B. Labor B",
+    "msnPlaceholder": "z.B. E-02-01-3002",
+    "msnError": "Geben Sie den Code im Format B-XX-XX-XXXX ein (z.B. E-02-01-3002)."
+  },
+  "calibrate": {
+    "title": "Gerät kalibrieren",
+    "subtitle": "Gerät",
+    "period": {
+      "label": "Kalibrierungsperiode",
+      "free": "Kalibrierungsfrei"
+    },
+    "notRequired": "Nicht erforderlich",
+    "certificate": "Kalibrierungszertifikat",
+    "uploadPdf": "PDF-Datei hochladen",
+    "pdfError": "Bitte laden Sie eine Datei im PDF-Format hoch.",
+    "saveButton": "Kalibrierung speichern"
+  },
+  "history": {
+    "title": "Kalibrierungsverlauf",
+    "subtitle": "Gerät",
+    "calibrationDate": "Kalibrierungsdatum",
+    "validUntil": "Gültig bis",
+    "period": "Periode",
+    "certificate": "Zertifikat",
+    "download": "Herunterladen",
+    "noHistory": "Für dieses Gerät existiert kein Kalibrierungsverlauf."
+  },
+  "export": {
+    "csvFilename": "kalibrierungsprotokoll",
+    "pdfFilename": "kalibrierungsprotokoll"
+  }
+}

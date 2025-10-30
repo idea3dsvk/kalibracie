@@ -1,0 +1,102 @@
+{
+  "general": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "year": "year",
+    "years": "years",
+    "noDevicesFound": "No devices found",
+    "noDevicesHint": "Try changing the filter or add a new device."
+  },
+  "login": {
+    "title": "Calibration Record",
+    "subtitle": "Please log in to continue.",
+    "username": "Username",
+    "usernamePlaceholder": "admin / moderator / user",
+    "password": "Password",
+    "passwordPlaceholder": "password",
+    "loginButton": "Log In",
+    "error": "Incorrect username or password.",
+    "demoAccounts": "Demo accounts"
+  },
+  "header": {
+    "title": "Calibration Record",
+    "logout": "Logout",
+    "addDevice": "Add device"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overdue": "Overdue",
+    "dueSoonThisMonth": "Due this month",
+    "deviceStatus": "Device Status"
+  },
+  "controls": {
+    "searchPlaceholder": "Search for a device...",
+    "allManufacturers": "All manufacturers",
+    "allUsages": "All usages",
+    "sortBy": {
+      "label": "Sort by",
+      "name": "Name",
+      "status": "Status",
+      "validity": "Validity"
+    }
+  },
+  "device": {
+    "name": "Name",
+    "serialNumber": "Serial number",
+    "manufacturer": "Manufacturer",
+    "model": "Model",
+    "usage": "Usage",
+    "msnCode": "MSN code",
+    "status": "Status",
+    "photo": "Device photo",
+    "validUntil": "Valid until",
+    "downloadCertificate": "Download certificate",
+    "calibrateButton": "Calibrate",
+    "deleteConfirm": "Are you sure you want to delete this device?"
+  },
+  "status": {
+    "valid": "Valid",
+    "dueSoon": "Due soon",
+    "overdue": "Overdue",
+    "uncalibrated": "Uncalibrated",
+    "validShort": "Valid",
+    "dueSoonShort": "Due",
+    "uncalibratedShort": "Uncalib."
+  },
+  "add": {
+    "title": "Add new device",
+    "changePhoto": "Change photo",
+    "uploadPhoto": "Upload photo",
+    "usagePlaceholder": "e.g. Laboratory B",
+    "msnPlaceholder": "e.g. E-02-01-3002",
+    "msnError": "Enter code in the format L-XX-XX-XXXX (e.g. E-02-01-3002)."
+  },
+  "calibrate": {
+    "title": "Calibrate Device",
+    "subtitle": "Device",
+    "period": {
+      "label": "Calibration period",
+      "free": "Calibration free"
+    },
+    "notRequired": "Not required",
+    "certificate": "Calibration certificate",
+    "uploadPdf": "Upload PDF file",
+    "pdfError": "Please upload a file in PDF format.",
+    "saveButton": "Save calibration"
+  },
+  "history": {
+    "title": "Calibration History",
+    "subtitle": "Device",
+    "calibrationDate": "Calibration date",
+    "validUntil": "Valid until",
+    "period": "Period",
+    "certificate": "Certificate",
+    "download": "Download",
+    "noHistory": "No calibration history exists for this device."
+  },
+  "export": {
+    "csvFilename": "calibration_record",
+    "pdfFilename": "calibration_record"
+  }
+}
