@@ -4,6 +4,7 @@ import {
   getFirestore, 
   collection, 
   doc, 
+  getDoc,
   setDoc, 
   updateDoc, 
   deleteDoc,
@@ -53,6 +54,24 @@ export class FirebaseService {
       const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as T));
       callback(data);
     });
+  }
+
+  /**
+   * Získa jeden dokument podľa ID
+   */
+  async getDocument<T>(collectionName: string, documentId: string): Promise<T | null> {
+    try {
+      const docRef = doc(this.firestore, collectionName, documentId);
+      const docSnap = await getDoc(docRef);
+      
+      if (docSnap.exists()) {
+        return { id: docSnap.id, ...docSnap.data() } as T;
+      }
+      return null;
+    } catch (err) {
+      console.error('Error getting document:', err);
+      return null;
+    }
   }
 
   /**

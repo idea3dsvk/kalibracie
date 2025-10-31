@@ -66,23 +66,25 @@ export class AuthService {
    */
   private async loadUserProfile(uid: string): Promise<void> {
     try {
-      this.firebaseService.getCollectionWithQuery<UserProfile>(
+      console.log('Loading user profile for UID:', uid);
+      const profile = await this.firebaseService.getDocument<UserProfile>(
         this.USERS_COLLECTION, 
-        'uid', 
-        '==', 
-        uid,
-        (profiles) => {
-          if (profiles.length > 0) {
-            const profile = profiles[0];
-            this.currentUser.set({
-              username: profile.username,
-              role: profile.role
-            });
-          }
-        }
+        uid
       );
+      
+      if (profile) {
+        console.log('User profile loaded:', profile);
+        this.currentUser.set({
+          username: profile.username,
+          role: profile.role
+        });
+      } else {
+        console.error('User profile not found in Firestore for UID:', uid);
+        this.currentUser.set(null);
+      }
     } catch (err) {
       console.error('Error loading user profile:', err);
+      this.currentUser.set(null);
     }
   }
 
