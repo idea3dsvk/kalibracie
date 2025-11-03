@@ -35,7 +35,6 @@ export class FirebaseService {
     return onSnapshot(
       collectionRef, 
       (snapshot) => {
-        console.log(`[Firestore] Real-time update for ${collectionName}:`, snapshot.docs.length, 'documents');
         const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as T));
         callback(data);
       },
