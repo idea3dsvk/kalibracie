@@ -263,10 +263,16 @@ export class AppComponent {
   
   toggleDarkMode(): void {
     const newValue = !this.isDarkMode();
+    console.log('Toggling dark mode from', this.isDarkMode(), 'to', newValue);
     this.isDarkMode.set(newValue);
     if (typeof window !== 'undefined') {
-      document.documentElement.classList.toggle('dark', newValue);
+      if (newValue) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
       localStorage.setItem('darkMode', String(newValue));
+      console.log('Dark mode applied, classList:', document.documentElement.classList.toString());
     }
   }
 
