@@ -413,19 +413,6 @@
                 <input id="nextCalibrationDate" type="text" [value]="nextCalibrationDatePreview()" class="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-md bg-slate-100 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400" disabled>
               </div>
               <div>
-                <label for="certificate" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ 'calibrate.certificate' | translate }} (PDF)</label>
-                <label for="certificate" class="relative cursor-pointer bg-white dark:bg-slate-700 rounded-md font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 border border-slate-300 dark:border-slate-600 p-2 text-center block">
-                  <span>
-                    @if (selectedCertificateFileName()) {
-                      {{ selectedCertificateFileName() }}
-                    } @else {
-                      {{ 'calibrate.uploadPdf' | translate }}
-                    }
-                  </span>
-                  <input id="certificate" name="certificate" type="file" class="sr-only" (change)="onCertificateFileChange($event)" accept="application/pdf">
-                </label>
-              </div>
-              <div>
                 <label for="label" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ 'calibrate.label' | translate }}</label>
                 @if (selectedLabelBase64()) {
                   <div class="mb-2 h-32 w-full flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">
@@ -477,7 +464,6 @@
                     <th scope="col" class="px-6 py-3">{{ 'history.calibrationDate' | translate }}</th>
                     <th scope="col" class="px-6 py-3">{{ 'history.validUntil' | translate }}</th>
                     <th scope="col" class="px-6 py-3">{{ 'history.period' | translate }}</th>
-                    <th scope="col" class="px-6 py-3">{{ 'history.certificate' | translate }}</th>
                     <th scope="col" class="px-6 py-3">{{ 'history.label' | translate }}</th>
                   </tr>
                 </thead>
@@ -491,13 +477,6 @@
                           {{ cal.calibrationPeriodInYears }} {{ getPeriodText(cal.calibrationPeriodInYears) }}
                         } @else {
                           {{ 'calibrate.period.free' | translate }}
-                        }
-                      </td>
-                      <td class="px-6 py-4">
-                        @if(cal.calibrationCertificateUrl) {
-                          <a [href]="cal.calibrationCertificateUrl" [download]="getHistoryCertificateFileName(cal, device)" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold" (click)="$event.stopPropagation()">{{ 'history.download' | translate }}</a>
-                        } @else {
-                          -
                         }
                       </td>
                       <td class="px-6 py-4">

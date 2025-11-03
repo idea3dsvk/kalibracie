@@ -55,8 +55,6 @@ export class AppComponent {
 
   // Form helpers
   selectedFileBase64 = signal<string | undefined>(undefined);
-  selectedCertificateBase64 = signal<string | undefined>(undefined);
-  selectedCertificateFileName = signal<string | undefined>(undefined);
   selectedLabelBase64 = signal<string | undefined>(undefined);
   selectedLabelFileName = signal<string | undefined>(undefined);
 
@@ -383,8 +381,6 @@ export class AppComponent {
       calibrationDate: today,
       calibrationPeriodInYears: latestCal?.calibrationPeriodInYears ?? 1,
     });
-    this.selectedCertificateBase64.set(undefined);
-    this.selectedCertificateFileName.set(undefined);
     this.selectedLabelBase64.set(undefined);
     this.selectedLabelFileName.set(undefined);
     this.updateNextCalibrationDatePreview();
@@ -395,8 +391,6 @@ export class AppComponent {
     this.showCalibrateModal.set(false);
     this.deviceToCalibrate.set(null);
     this.nextCalibrationDatePreview.set(null);
-    this.selectedCertificateBase64.set(undefined);
-    this.selectedCertificateFileName.set(undefined);
     this.selectedLabelBase64.set(undefined);
     this.selectedLabelFileName.set(undefined);
   }
@@ -415,24 +409,6 @@ export class AppComponent {
       }
     } else {
       this.nextCalibrationDatePreview.set(null);
-    }
-  }
-  
-  onCertificateFileChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      if (file.type !== 'application/pdf') {
-        alert(this.translationService.translate('calibrate.pdfError'));
-        input.value = '';
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        this.selectedCertificateBase64.set(e.target?.result as string);
-        this.selectedCertificateFileName.set(file.name);
-      };
-      reader.readAsDataURL(file);
     }
   }
 
@@ -475,8 +451,6 @@ export class AppComponent {
           await this.deviceService.calibrateDevice(device.id, {
             calibrationDate: formValue.calibrationDate,
             calibrationPeriodInYears: Number(formValue.calibrationPeriodInYears),
-            calibrationCertificateUrl: this.selectedCertificateBase64(),
-            calibrationCertificateFileName: this.selectedCertificateFileName(),
             calibrationLabelUrl: this.selectedLabelBase64(),
             calibrationLabelFileName: this.selectedLabelFileName(),
           });

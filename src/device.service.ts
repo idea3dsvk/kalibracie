@@ -93,8 +93,6 @@ export class DeviceService {
   async calibrateDevice(id: string, calibrationData: { 
     calibrationDate: string; 
     calibrationPeriodInYears: number;
-    calibrationCertificateUrl?: string;
-    calibrationCertificateFileName?: string;
     calibrationLabelUrl?: string;
     calibrationLabelFileName?: string;
   }): Promise<void> {
@@ -116,8 +114,6 @@ export class DeviceService {
       calibrationDate: new Date(calibrationData.calibrationDate).toISOString(),
       calibrationPeriodInYears: period,
       nextCalibrationDate: nextCalibrationDate,
-      calibrationCertificateUrl: calibrationData.calibrationCertificateUrl,
-      calibrationCertificateFileName: calibrationData.calibrationCertificateFileName,
       calibrationLabelUrl: calibrationData.calibrationLabelUrl,
       calibrationLabelFileName: calibrationData.calibrationLabelFileName,
     };
