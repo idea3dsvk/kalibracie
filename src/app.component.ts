@@ -66,7 +66,7 @@ export class AppComponent {
   isAdding = signal(false);
   searchTerm = signal('');
   selectedManufacturer = signal('all');
-  selectedUsage = signal('all');
+  selectedValidity = signal<'all' | DeviceStatus>('all');
   sortConfig = signal<{ key: SortKey; direction: SortDirection }>({ key: 'name', direction: 'asc' });
 
   constructor() {
@@ -134,32 +134,39 @@ export class AppComponent {
     return [this.translationService.translate('controls.allManufacturers'), ...Array.from(new Set(manufacturers)).sort()];
   });
 
-  uniqueUsages = computed(() => {
-    const usages = this.devices().map(d => d.usage).filter(Boolean);
-    return [this.translationService.translate('controls.allUsages'), ...Array.from(new Set(usages)).sort()];
+  validityOptions = computed(() => {
+    return [
+      { value: 'all', label: this.translationService.translate('controls.allValidities') },
+      { value: 'valid', label: this.translationService.translate('status.valid') },
+      { value: 'due-soon', label: this.translationService.translate('status.dueSoon') },
+      { value: 'overdue', label: this.translationService.translate('status.overdue') },
+      { value: 'uncalibrated', label: this.translationService.translate('status.uncalibrated') },
+      { value: 'calibration-free', label: this.translationService.translate('status.calibrationFree') },
+    ];
   });
 
   displayedDevices = computed(() => {
     const term = this.searchTerm().toLowerCase();
     const manufacturerKey = this.selectedManufacturer();
-    const usageKey = this.selectedUsage();
+    const validityKey = this.selectedValidity();
     const sort = this.sortConfig();
     
     const manufacturer = manufacturerKey === 'all' ? 'all' : manufacturerKey;
-    const usage = usageKey === 'all' ? 'all' : usageKey;
+    const validity = validityKey;
 
-    let filtered = this.devices().filter(device =>
-        (manufacturer === 'all' || device.manufacturer === manufacturer) &&
-        (usage === 'all' || device.usage === usage) &&
-        (
-            device.name.toLowerCase().includes(term) ||
-            device.serialNumber.toLowerCase().includes(term) ||
-            device.manufacturer.toLowerCase().includes(term) ||
-            device.model.toLowerCase().includes(term) ||
-            device.usage.toLowerCase().includes(term) ||
-            device.msnCode.toLowerCase().includes(term)
-        )
-    );
+    let filtered = this.devices().filter(device => {
+        const deviceStatus = this.getDeviceStatus(device);
+        return (manufacturer === 'all' || device.manufacturer === manufacturer) &&
+            (validity === 'all' || deviceStatus === validity) &&
+            (
+                device.name.toLowerCase().includes(term) ||
+                device.serialNumber.toLowerCase().includes(term) ||
+                device.manufacturer.toLowerCase().includes(term) ||
+                device.model.toLowerCase().includes(term) ||
+                device.usage.toLowerCase().includes(term) ||
+                device.msnCode.toLowerCase().includes(term)
+            );
+    });
 
     const statusOrder: Record<DeviceStatus, number> = { overdue: 1, 'due-soon': 2, uncalibrated: 3, valid: 4, 'calibration-free': 5 };
 
@@ -268,9 +275,9 @@ export class AppComponent {
     this.selectedManufacturer.set(select.value);
   }
 
-  onUsageChange(event: Event): void {
+  onValidityChange(event: Event): void {
     const select = event.target as HTMLSelectElement;
-    this.selectedUsage.set(select.value);
+    this.selectedValidity.set(select.value as 'all' | DeviceStatus);
   }
 
   setSort(key: SortKey): void {
@@ -353,13 +360,15 @@ export class AppComponent {
       this.isAdding.set(true);
       try {
         await this.deviceService.addDevice({
+            id: crypto.randomUUID(),
             name: formValue.name!,
             serialNumber: formValue.serialNumber!,
             manufacturer: formValue.manufacturer!,
             model: formValue.model!,
             usage: formValue.usage!,
             msnCode: formValue.msnCode!.toUpperCase(),
-            photoUrl: this.selectedFileBase64()
+            photoUrl: this.selectedFileBase64(),
+            calibrationHistory: []
         });
         this.closeAddModal();
       } catch (err) {

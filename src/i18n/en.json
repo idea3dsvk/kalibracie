@@ -37,6 +37,7 @@
     "searchPlaceholder": "Search for a device...",
     "allManufacturers": "All manufacturers",
     "allUsages": "All usages",
+    "allValidities": "All validities",
     "sortBy": {
       "label": "Sort by",
       "name": "Name",
