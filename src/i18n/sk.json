@@ -10,7 +10,8 @@
     "noDevicesFound": "Nenašli sa žiadne zariadenia",
     "noDevicesHint": "Skúste zmeniť filter alebo pridajte nové zariadenie.",
     "errorSaving": "Chyba pri ukladaní do databázy",
-    "errorDeleting": "Chyba pri mazaní z databázy"
+    "errorDeleting": "Chyba pri mazaní z databázy",
+    "documentTooLarge": "Súbory sú príliš veľké. Použite menšie obrázky (max 500 KB)."
   },
   "login": {
     "title": "Evidencia kalibrácií",

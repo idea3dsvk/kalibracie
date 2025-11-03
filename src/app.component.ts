@@ -481,9 +481,10 @@ export class AppComponent {
             calibrationLabelFileName: this.selectedLabelFileName(),
           });
           this.closeCalibrateModal();
-        } catch (err) {
+        } catch (err: any) {
           console.error('Error calibrating device:', err);
-          alert(this.translationService.translate('general.errorSaving'));
+          const errorMessage = err?.message || this.translationService.translate('general.errorSaving');
+          alert(`${this.translationService.translate('general.errorSaving')}\n\nDetail: ${errorMessage}`);
         } finally {
           this.isCalibrating.set(false);
         }

@@ -54,10 +54,19 @@ export class DeviceService {
 
   private async saveDeviceToFirestore(device: Device): Promise<void> {
     try {
+      // Skontroluj veľkosť dokumentu (Firestore limit je 1 MB)
+      const deviceJson = JSON.stringify(device);
+      const sizeInBytes = new Blob([deviceJson]).size;
+      const sizeInMB = sizeInBytes / (1024 * 1024);
+      
+      if (sizeInMB > 0.95) {
+        throw new Error(`Dokument je príliš veľký (${sizeInMB.toFixed(2)} MB). Firestore limit je 1 MB. Použite menšie obrázky alebo certifikáty.`);
+      }
+      
       await this.firebaseService.setDocument(this.COLLECTION_NAME, device.id, device);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error saving device to Firestore:', err);
-      throw new Error('Chyba pri ukladaní zariadenia do databázy');
+      throw new Error(err?.message || 'Chyba pri ukladaní zariadenia do databázy');
     }
   }
 
