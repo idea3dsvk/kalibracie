@@ -23,6 +23,7 @@
     "loginButton": "Prihlásiť sa",
     "error": "Nesprávny email alebo heslo.",
     "demoAccounts": "Demo účty",
+    "supportedAccounts": "Podporované účty",
     "loading": "Prihlasovanie..."
   },
   "header": {

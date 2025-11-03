@@ -19,7 +19,8 @@
     "passwordPlaceholder": "password",
     "loginButton": "Anmelden",
     "error": "Falscher Benutzername oder falsches Passwort.",
-    "demoAccounts": "Demo-Konten"
+    "demoAccounts": "Demo-Konten",
+    "supportedAccounts": "Unterstützte Konten"
   },
   "header": {
     "title": "Kalibrierungsprotokoll",

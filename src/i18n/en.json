@@ -19,7 +19,8 @@
     "passwordPlaceholder": "password",
     "loginButton": "Log In",
     "error": "Incorrect username or password.",
-    "demoAccounts": "Demo accounts"
+    "demoAccounts": "Demo accounts",
+    "supportedAccounts": "Supported accounts"
   },
   "header": {
     "title": "Calibration Record",
