@@ -60,6 +60,10 @@ export class AppComponent {
 
   // Data & Filtering & Sorting
   devices = this.deviceService.getDevices();
+  loading = this.deviceService.loading;
+  isDeleting = signal(false);
+  isCalibrating = signal(false);
+  isAdding = signal(false);
   searchTerm = signal('');
   selectedManufacturer = signal('all');
   selectedUsage = signal('all');
@@ -346,6 +350,7 @@ export class AppComponent {
   async addDevice(): Promise<void> {
     if (this.deviceForm.valid) {
       const formValue = this.deviceForm.getRawValue();
+      this.isAdding.set(true);
       try {
         await this.deviceService.addDevice({
             name: formValue.name!,
@@ -360,6 +365,8 @@ export class AppComponent {
       } catch (err) {
         console.error('Error adding device:', err);
         alert(this.translationService.translate('general.errorSaving'));
+      } finally {
+        this.isAdding.set(false);
       }
     } else {
       this.deviceForm.markAllAsTouched();
@@ -439,6 +446,7 @@ export class AppComponent {
       const formValue = this.calibrateForm.getRawValue();
       
       if (device && formValue.calibrationDate && formValue.calibrationPeriodInYears !== null) {
+        this.isCalibrating.set(true);
         try {
           await this.deviceService.calibrateDevice(device.id, {
             calibrationDate: formValue.calibrationDate,
@@ -450,6 +458,8 @@ export class AppComponent {
         } catch (err) {
           console.error('Error calibrating device:', err);
           alert(this.translationService.translate('general.errorSaving'));
+        } finally {
+          this.isCalibrating.set(false);
         }
       }
     } else {
@@ -459,11 +469,14 @@ export class AppComponent {
 
   async deleteDevice(id: string): Promise<void> {
     if (confirm(this.translationService.translate('device.deleteConfirm'))) {
+      this.isDeleting.set(true);
       try {
         await this.deviceService.deleteDevice(id);
       } catch (err) {
         console.error('Error deleting device:', err);
         alert(this.translationService.translate('general.errorDeleting'));
+      } finally {
+        this.isDeleting.set(false);
       }
     }
   }

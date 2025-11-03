@@ -195,7 +195,16 @@
     </div>
 
     <!-- Device Grid -->
-    @if (displayedDevices().length > 0) {
+    @if (loading()) {
+      <div class="text-center py-16 px-8 bg-white dark:bg-slate-800 rounded-lg shadow-md">
+        <svg class="animate-spin h-12 w-12 mx-auto text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <h3 class="mt-4 text-lg font-medium text-slate-800 dark:text-slate-200">{{ 'general.loading' | translate }}</h3>
+        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">{{ 'general.loadingDevices' | translate }}</p>
+      </div>
+    } @else if (displayedDevices().length > 0) {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         @for (device of displayedDevices(); track device.id) {
           @let latestCal = getLatestCalibration(device);
@@ -278,10 +287,17 @@
                 </button>
               }
               @if(canDelete()) {
-                <button (click)="deleteDevice(device.id); $event.stopPropagation()" class="text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-500 transition p-1 rounded-full ml-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                  </svg>
+                <button (click)="deleteDevice(device.id); $event.stopPropagation()" [disabled]="isDeleting()" class="text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-500 transition p-1 rounded-full ml-4 disabled:opacity-50 disabled:cursor-not-allowed">
+                  @if(isDeleting()) {
+                    <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  } @else {
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                  }
                 </button>
               }
             </div>
@@ -352,8 +368,16 @@
               </div>
             </div>
             <div class="flex justify-end gap-4 p-8 pt-4 bg-slate-50 dark:bg-slate-800/50 rounded-b-xl border-t border-slate-200 dark:border-slate-700">
-              <button type="button" (click)="closeAddModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200 rounded-md hover:bg-slate-300 dark:hover:bg-slate-500 transition">{{ 'general.cancel' | translate }}</button>
-              <button type="submit" [disabled]="deviceForm.invalid" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:bg-blue-300 disabled:cursor-not-allowed">{{ 'general.save' | translate }}</button>
+              <button type="button" (click)="closeAddModal()" [disabled]="isAdding()" class="px-4 py-2 bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200 rounded-md hover:bg-slate-300 dark:hover:bg-slate-500 transition disabled:opacity-50 disabled:cursor-not-allowed">{{ 'general.cancel' | translate }}</button>
+              <button type="submit" [disabled]="deviceForm.invalid || isAdding()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:bg-blue-300 disabled:cursor-not-allowed flex items-center gap-2">
+                @if(isAdding()) {
+                  <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                }
+                {{ 'general.save' | translate }}
+              </button>
             </div>
           </form>
         </div>
@@ -403,8 +427,16 @@
               </div>
             </div>
             <div class="flex justify-end gap-4 p-8 pt-4 bg-slate-50 dark:bg-slate-800/50 rounded-b-xl border-t border-slate-200 dark:border-slate-700">
-              <button type="button" (click)="closeCalibrateModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200 rounded-md hover:bg-slate-300 dark:hover:bg-slate-500 transition">{{ 'general.cancel' | translate }}</button>
-              <button type="submit" [disabled]="calibrateForm.invalid" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:bg-blue-300 disabled:cursor-not-allowed">{{ 'calibrate.saveButton' | translate }}</button>
+              <button type="button" (click)="closeCalibrateModal()" [disabled]="isCalibrating()" class="px-4 py-2 bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200 rounded-md hover:bg-slate-300 dark:hover:bg-slate-500 transition disabled:opacity-50 disabled:cursor-not-allowed">{{ 'general.cancel' | translate }}</button>
+              <button type="submit" [disabled]="calibrateForm.invalid || isCalibrating()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:bg-blue-300 disabled:cursor-not-allowed flex items-center gap-2">
+                @if(isCalibrating()) {
+                  <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                }
+                {{ 'calibrate.saveButton' | translate }}
+              </button>
             </div>
           </form>
         </div>

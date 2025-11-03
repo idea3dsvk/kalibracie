@@ -5,6 +5,8 @@
     "close": "Schließen",
     "year": "Jahr",
     "years": "Jahre",
+    "loading": "Laden...",
+    "loadingDevices": "Geräte werden aus der Datenbank geladen",
     "noDevicesFound": "Keine Geräte gefunden",
     "noDevicesHint": "Ändern Sie den Filter oder fügen Sie ein neues Gerät hinzu."
   },
@@ -60,9 +62,11 @@
     "dueSoon": "Bald fällig",
     "overdue": "Überfällig",
     "uncalibrated": "Unkalibriert",
+    "calibrationFree": "Kalibrierung nicht erforderlich",
     "validShort": "Gültig",
     "dueSoonShort": "Fällig",
-    "uncalibratedShort": "Unkalib."
+    "uncalibratedShort": "Unkalib.",
+    "calibrationFreeShort": "Keine Kalib."
   },
   "add": {
     "title": "Neues Gerät hinzufügen",

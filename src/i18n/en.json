@@ -5,6 +5,8 @@
     "close": "Close",
     "year": "year",
     "years": "years",
+    "loading": "Loading...",
+    "loadingDevices": "Loading devices from database",
     "noDevicesFound": "No devices found",
     "noDevicesHint": "Try changing the filter or add a new device."
   },
@@ -60,9 +62,11 @@
     "dueSoon": "Due soon",
     "overdue": "Overdue",
     "uncalibrated": "Uncalibrated",
+    "calibrationFree": "Calibration not required",
     "validShort": "Valid",
     "dueSoonShort": "Due",
-    "uncalibratedShort": "Uncalib."
+    "uncalibratedShort": "Uncalib.",
+    "calibrationFreeShort": "No calib."
   },
   "add": {
     "title": "Add new device",

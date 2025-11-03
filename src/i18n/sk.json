@@ -5,6 +5,8 @@
     "close": "Zavrieť",
     "year": "rok",
     "years": "roky",
+    "loading": "Načítavam...",
+    "loadingDevices": "Načítavam zariadenia z databázy",
     "noDevicesFound": "Nenašli sa žiadne zariadenia",
     "noDevicesHint": "Skúste zmeniť filter alebo pridajte nové zariadenie.",
     "errorSaving": "Chyba pri ukladaní do databázy",
@@ -63,9 +65,11 @@
     "dueSoon": "Končí platnosť",
     "overdue": "Neplatná",
     "uncalibrated": "Nekalibrované",
+    "calibrationFree": "Kalibrácia nie je potrebná",
     "validShort": "Platná",
     "dueSoonShort": "Končí",
-    "uncalibratedShort": "Nekalib."
+    "uncalibratedShort": "Nekalib.",
+    "calibrationFreeShort": "Bez kalib."
   },
   "add": {
     "title": "Pridať nové zariadenie",
