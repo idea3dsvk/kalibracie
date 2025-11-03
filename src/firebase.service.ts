@@ -32,10 +32,17 @@ export class FirebaseService {
    */
   getCollection<T>(collectionName: string, callback: (data: T[]) => void): () => void {
     const collectionRef = collection(this.firestore, collectionName);
-    return onSnapshot(collectionRef, (snapshot) => {
-      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as T));
-      callback(data);
-    });
+    return onSnapshot(
+      collectionRef, 
+      (snapshot) => {
+        console.log(`[Firestore] Real-time update for ${collectionName}:`, snapshot.docs.length, 'documents');
+        const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as T));
+        callback(data);
+      },
+      (error) => {
+        console.error(`[Firestore] Error in real-time listener for ${collectionName}:`, error);
+      }
+    );
   }
 
   /**

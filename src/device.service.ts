@@ -25,13 +25,16 @@ export class DeviceService {
 
     try {
       // Subscribe na real-time updates z Firestore
+      console.log('[DeviceService] Setting up real-time listener...');
       this.unsubscribe = this.firebaseService.getCollection<Device>(
         this.COLLECTION_NAME,
         (devices) => {
+          console.log('[DeviceService] Received update from Firestore:', devices.length, 'devices');
           this.devices.set(devices);
           this.loading.set(false);
         }
       );
+      console.log('[DeviceService] Real-time listener initialized');
     } catch (err) {
       console.error('Error loading devices from Firestore:', err);
       this.error.set('Chyba pri načítaní zariadení z databázy');
@@ -82,7 +85,9 @@ export class DeviceService {
     };
     
     try {
+      console.log('[DeviceService] Adding new device:', newDevice.id);
       await this.saveDeviceToFirestore(newDevice);
+      console.log('[DeviceService] Device added successfully, waiting for real-time update...');
       // Neaktualizujeme lokálne - Firestore listener to urobí automaticky
     } catch (err) {
       console.error('Error adding device:', err);
@@ -134,7 +139,9 @@ export class DeviceService {
 
   async deleteDevice(id: string): Promise<void> {
     try {
+      console.log('[DeviceService] Deleting device:', id);
       await this.firebaseService.deleteDocument(this.COLLECTION_NAME, id);
+      console.log('[DeviceService] Device deleted successfully, waiting for real-time update...');
       // Neaktualizujeme lokálne - Firestore listener to urobí automaticky
     } catch (err) {
       console.error('Error deleting device:', err);
