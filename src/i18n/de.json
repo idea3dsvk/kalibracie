@@ -87,6 +87,9 @@
     "certificate": "Kalibrierungszertifikat",
     "uploadPdf": "PDF-Datei hochladen",
     "pdfError": "Bitte laden Sie eine Datei im PDF-Format hoch.",
+    "label": "Kalibrierungsetikett (Foto)",
+    "uploadLabel": "Bild hochladen",
+    "imageError": "Bitte laden Sie ein Bild hoch (JPG, PNG).",
     "saveButton": "Kalibrierung speichern"
   },
   "history": {
@@ -96,6 +99,7 @@
     "validUntil": "Gültig bis",
     "period": "Periode",
     "certificate": "Zertifikat",
+    "label": "Etikett",
     "download": "Herunterladen",
     "noHistory": "Für dieses Gerät existiert kein Kalibrierungsverlauf."
   },

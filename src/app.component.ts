@@ -57,6 +57,8 @@ export class AppComponent {
   selectedFileBase64 = signal<string | undefined>(undefined);
   selectedCertificateBase64 = signal<string | undefined>(undefined);
   selectedCertificateFileName = signal<string | undefined>(undefined);
+  selectedLabelBase64 = signal<string | undefined>(undefined);
+  selectedLabelFileName = signal<string | undefined>(undefined);
 
   // Data & Filtering & Sorting
   devices = this.deviceService.getDevices();
@@ -383,6 +385,8 @@ export class AppComponent {
     });
     this.selectedCertificateBase64.set(undefined);
     this.selectedCertificateFileName.set(undefined);
+    this.selectedLabelBase64.set(undefined);
+    this.selectedLabelFileName.set(undefined);
     this.updateNextCalibrationDatePreview();
     this.showCalibrateModal.set(true);
   }
@@ -393,6 +397,8 @@ export class AppComponent {
     this.nextCalibrationDatePreview.set(null);
     this.selectedCertificateBase64.set(undefined);
     this.selectedCertificateFileName.set(undefined);
+    this.selectedLabelBase64.set(undefined);
+    this.selectedLabelFileName.set(undefined);
   }
 
   updateNextCalibrationDatePreview(): void {
@@ -429,6 +435,24 @@ export class AppComponent {
       reader.readAsDataURL(file);
     }
   }
+
+  onLabelFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      if (!file.type.startsWith('image/')) {
+        alert(this.translationService.translate('calibrate.imageError'));
+        input.value = '';
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        this.selectedLabelBase64.set(e.target?.result as string);
+        this.selectedLabelFileName.set(file.name);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
   
   getCertificateFileName(device: Device): string {
     const latestCal = this.getLatestCalibration(device);
@@ -453,6 +477,8 @@ export class AppComponent {
             calibrationPeriodInYears: Number(formValue.calibrationPeriodInYears),
             calibrationCertificateUrl: this.selectedCertificateBase64(),
             calibrationCertificateFileName: this.selectedCertificateFileName(),
+            calibrationLabelUrl: this.selectedLabelBase64(),
+            calibrationLabelFileName: this.selectedLabelFileName(),
           });
           this.closeCalibrateModal();
         } catch (err) {

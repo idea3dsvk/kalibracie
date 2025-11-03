@@ -4,6 +4,8 @@ export interface Calibration {
   calibrationPeriodInYears: number;
   calibrationCertificateUrl?: string; // Base64 Data URL for PDF
   calibrationCertificateFileName?: string;
+  calibrationLabelUrl?: string; // Base64 Data URL for calibration label image
+  calibrationLabelFileName?: string;
 }
 
 export interface Device {

@@ -90,6 +90,9 @@
     "certificate": "Kalibračný certifikát",
     "uploadPdf": "Nahrať PDF súbor",
     "pdfError": "Prosím, nahrajte súbor vo formáte PDF.",
+    "label": "Kalibračný štítok (fotka)",
+    "uploadLabel": "Nahrať obrázok",
+    "imageError": "Prosím, nahrajte obrázok (JPG, PNG).",
     "saveButton": "Uložiť kalibráciu"
   },
   "history": {
@@ -99,6 +102,7 @@
     "validUntil": "Platnosť do",
     "period": "Perióda",
     "certificate": "Certifikát",
+    "label": "Štítok",
     "download": "Stiahnuť",
     "noHistory": "Pre toto zariadenie neexistuje žiadna história kalibrácií."
   },

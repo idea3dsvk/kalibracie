@@ -87,6 +87,9 @@
     "certificate": "Calibration certificate",
     "uploadPdf": "Upload PDF file",
     "pdfError": "Please upload a file in PDF format.",
+    "label": "Calibration label (photo)",
+    "uploadLabel": "Upload image",
+    "imageError": "Please upload an image (JPG, PNG).",
     "saveButton": "Save calibration"
   },
   "history": {
@@ -96,6 +99,7 @@
     "validUntil": "Valid until",
     "period": "Period",
     "certificate": "Certificate",
+    "label": "Label",
     "download": "Download",
     "noHistory": "No calibration history exists for this device."
   },

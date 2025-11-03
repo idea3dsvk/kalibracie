@@ -86,6 +86,8 @@ export class DeviceService {
     calibrationPeriodInYears: number;
     calibrationCertificateUrl?: string;
     calibrationCertificateFileName?: string;
+    calibrationLabelUrl?: string;
+    calibrationLabelFileName?: string;
   }): Promise<void> {
     const device = this.devices().find(d => d.id === id);
     if (!device) {
@@ -107,6 +109,8 @@ export class DeviceService {
       nextCalibrationDate: nextCalibrationDate,
       calibrationCertificateUrl: calibrationData.calibrationCertificateUrl,
       calibrationCertificateFileName: calibrationData.calibrationCertificateFileName,
+      calibrationLabelUrl: calibrationData.calibrationLabelUrl,
+      calibrationLabelFileName: calibrationData.calibrationLabelFileName,
     };
 
     const updatedDevice = {

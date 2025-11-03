@@ -425,6 +425,24 @@
                   <input id="certificate" name="certificate" type="file" class="sr-only" (change)="onCertificateFileChange($event)" accept="application/pdf">
                 </label>
               </div>
+              <div>
+                <label for="label" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{{ 'calibrate.label' | translate }}</label>
+                @if (selectedLabelBase64()) {
+                  <div class="mb-2 h-32 w-full flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">
+                    <img [src]="selectedLabelBase64()" alt="Kalibračný štítok" class="max-h-full max-w-full object-contain rounded-md">
+                  </div>
+                }
+                <label for="label" class="relative cursor-pointer bg-white dark:bg-slate-700 rounded-md font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 border border-slate-300 dark:border-slate-600 p-2 text-center block">
+                  <span>
+                    @if (selectedLabelFileName()) {
+                      {{ selectedLabelFileName() }}
+                    } @else {
+                      {{ 'calibrate.uploadLabel' | translate }}
+                    }
+                  </span>
+                  <input id="label" name="label" type="file" class="sr-only" (change)="onLabelFileChange($event)" accept="image/*">
+                </label>
+              </div>
             </div>
             <div class="flex justify-end gap-4 p-8 pt-4 bg-slate-50 dark:bg-slate-800/50 rounded-b-xl border-t border-slate-200 dark:border-slate-700">
               <button type="button" (click)="closeCalibrateModal()" [disabled]="isCalibrating()" class="px-4 py-2 bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200 rounded-md hover:bg-slate-300 dark:hover:bg-slate-500 transition disabled:opacity-50 disabled:cursor-not-allowed">{{ 'general.cancel' | translate }}</button>
@@ -460,6 +478,7 @@
                     <th scope="col" class="px-6 py-3">{{ 'history.validUntil' | translate }}</th>
                     <th scope="col" class="px-6 py-3">{{ 'history.period' | translate }}</th>
                     <th scope="col" class="px-6 py-3">{{ 'history.certificate' | translate }}</th>
+                    <th scope="col" class="px-6 py-3">{{ 'history.label' | translate }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -477,6 +496,13 @@
                       <td class="px-6 py-4">
                         @if(cal.calibrationCertificateUrl) {
                           <a [href]="cal.calibrationCertificateUrl" [download]="getHistoryCertificateFileName(cal, device)" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold" (click)="$event.stopPropagation()">{{ 'history.download' | translate }}</a>
+                        } @else {
+                          -
+                        }
+                      </td>
+                      <td class="px-6 py-4">
+                        @if(cal.calibrationLabelUrl) {
+                          <img [src]="cal.calibrationLabelUrl" alt="Kalibračný štítok" class="h-12 w-auto rounded cursor-pointer hover:scale-150 transition-transform" (click)="$event.stopPropagation()" title="Kliknite pre zväčšenie">
                         } @else {
                           -
                         }
