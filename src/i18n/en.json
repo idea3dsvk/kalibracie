@@ -99,7 +99,7 @@
     "validUntil": "Valid until",
     "period": "Period",
     "certificate": "Certificate",
-    "label": "Label",
+    "label": "Calibration label",
     "download": "Download",
     "noHistory": "No calibration history exists for this device."
   },
