@@ -262,7 +262,12 @@ export class AppComponent {
   });
   
   toggleDarkMode(): void {
-    this.isDarkMode.update(value => !value);
+    const newValue = !this.isDarkMode();
+    this.isDarkMode.set(newValue);
+    if (typeof window !== 'undefined') {
+      document.documentElement.classList.toggle('dark', newValue);
+      localStorage.setItem('darkMode', String(newValue));
+    }
   }
 
   onSearch(event: Event): void {
