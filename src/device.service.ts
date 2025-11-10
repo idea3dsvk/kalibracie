@@ -1,6 +1,7 @@
-import { Injectable, signal, inject } from '@angular/core';
+import { Injectable, signal, inject, effect } from '@angular/core';
 import { Device, Calibration } from './device.model';
 import { FirebaseService } from './firebase.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { FirebaseService } from './firebase.service';
 export class DeviceService {
   private readonly COLLECTION_NAME = 'devices';
   private firebaseService = inject(FirebaseService);
+  private authService = inject(AuthService);
   private unsubscribe?: () => void;
   
   devices = signal<Device[]>([]);
@@ -15,19 +17,37 @@ export class DeviceService {
   error = signal<string | null>(null);
 
   constructor() {
-    // Načítaj zariadenia pri inicializácii
-    this.loadDevicesFromFirestore();
+    // Sleduj zmeny v autentifikácii a načítaj/vyčisti zariadenia
+    effect(() => {
+      const user = this.authService.currentUser();
+      if (user) {
+        // Používateľ je prihlásený - načítaj zariadenia
+        this.loadDevicesFromFirestore();
+      } else {
+        // Používateľ je odhlásený - vyčisti dáta a zruš listener
+        this.cleanup();
+      }
+    });
   }
 
   private loadDevicesFromFirestore(): void {
+    // Zruš existujúci listener ak existuje
+    if (this.unsubscribe) {
+      console.log('Cleaning up existing Firestore listener');
+      this.unsubscribe();
+      this.unsubscribe = undefined;
+    }
+
     this.loading.set(true);
     this.error.set(null);
+    console.log('Loading devices from Firestore...');
 
     try {
       // Subscribe na real-time updates z Firestore
       this.unsubscribe = this.firebaseService.getCollection<Device>(
         this.COLLECTION_NAME,
         (devices) => {
+          console.log(`Devices loaded: ${devices.length} items`);
           this.devices.set(devices);
           this.loading.set(false);
         }
@@ -39,6 +59,20 @@ export class DeviceService {
       // Fallback na LocalStorage ak Firestore zlyhá
       this.loadDevicesFromLocalStorage();
     }
+  }
+
+  /**
+   * Vyčistí zariadenia a zruší Firestore listener
+   */
+  private cleanup(): void {
+    console.log('Cleaning up device service');
+    if (this.unsubscribe) {
+      this.unsubscribe();
+      this.unsubscribe = undefined;
+    }
+    this.devices.set([]);
+    this.loading.set(false);
+    this.error.set(null);
   }
 
   private loadDevicesFromLocalStorage(): void {
