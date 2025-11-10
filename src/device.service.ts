@@ -15,6 +15,7 @@ export class DeviceService {
   devices = signal<Device[]>([]);
   loading = signal<boolean>(false);
   error = signal<string | null>(null);
+  private isListenerActive = false;
 
   constructor() {
     // Sleduj zmeny v autentifikácii a načítaj/vyčisti zariadenia
@@ -31,16 +32,16 @@ export class DeviceService {
   }
 
   private loadDevicesFromFirestore(): void {
-    // Zruš existujúci listener ak existuje
-    if (this.unsubscribe) {
-      console.log('Cleaning up existing Firestore listener');
-      this.unsubscribe();
-      this.unsubscribe = undefined;
+    // Ak už listener beží, neznova ho vytvárať
+    if (this.isListenerActive) {
+      console.log('Firestore listener is already active, skipping...');
+      return;
     }
 
     this.loading.set(true);
     this.error.set(null);
     console.log('Loading devices from Firestore...');
+    this.isListenerActive = true;
 
     try {
       // Subscribe na real-time updates z Firestore
@@ -70,6 +71,7 @@ export class DeviceService {
       this.unsubscribe();
       this.unsubscribe = undefined;
     }
+    this.isListenerActive = false;
     this.devices.set([]);
     this.loading.set(false);
     this.error.set(null);
