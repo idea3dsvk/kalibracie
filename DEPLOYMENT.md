@@ -28,7 +28,7 @@ Pre produkčné prostredie použite súbor `src/environments/environment.prod.ts
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyBqisPaUxduzxorz0tD23PmgnDSI8Q_WvY",
+    apiKey: "YOUR_API_KEY_HERE",
     authDomain: "kalibracie-d10e5.firebaseapp.com",
     projectId: "kalibracie-d10e5",
     storageBucket: "kalibracie-d10e5.firebasestorage.app",
