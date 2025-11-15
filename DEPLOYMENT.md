@@ -28,7 +28,7 @@ Pre produkčné prostredie použite súbor `src/environments/environment.prod.ts
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: process.env.VITE_FIREBASE_API_KEY,
     authDomain: "kalibracie-d10e5.firebaseapp.com",
     projectId: "kalibracie-d10e5",
     storageBucket: "kalibracie-d10e5.firebasestorage.app",
@@ -36,7 +36,7 @@ export const environment = {
     appId: "1:755628651103:web:f1e0e2cb1b4f6e5f8c5a9e",
   },
   recaptcha: {
-    siteKey: "YOUR_RECAPTCHA_SITE_KEY", // Konfigurovať ak používate reCAPTCHA
+    siteKey: process.env.VITE_RECAPTCHA_SITE_KEY, // Konfigurovať ak používate reCAPTCHA
   },
 };
 ```
